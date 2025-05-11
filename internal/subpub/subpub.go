@@ -45,8 +45,8 @@ func (h *hub) Publish(subject string, msg interface{}) error {
 	if h.isClosing {
 		return cerr.ErrSubClosed
 	}
-	subscribers := h.Subjects[subject]
-	if len(subscribers) == 0 {
+	subscribers, ok := h.Subjects[subject]
+	if !ok {
 		return cerr.ErrNoTopic
 	}
 	h.mutex.RLock()

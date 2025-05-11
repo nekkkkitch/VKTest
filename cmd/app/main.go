@@ -3,6 +3,7 @@ package main
 import (
 	"VKTest/internal/server"
 	"VKTest/internal/subpub"
+	"fmt"
 	"log/slog"
 
 	"github.com/ilyakaznacheev/cleanenv"
@@ -30,7 +31,7 @@ func main() {
 	slog.Info("Config read successfully")
 	slog.Info("Starting SubPub")
 	h := subpub.NewSubPub()
-	slog.Info("SubPub started")
+	slog.Info(fmt.Sprintf("SubPub started: %v", h))
 	slog.Info("Staring server")
 	server, err := server.New(*cfg.ServerConfig, h)
 	if err != nil {
